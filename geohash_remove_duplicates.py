@@ -1,8 +1,6 @@
 import pandas as pd
 import os
 
-import os
-
 path_base = os.getcwd()
 path = os.path.join(path_base, 'results')
 filesnames = os.listdir(path)
