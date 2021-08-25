@@ -1,3 +1,6 @@
+## **git file**
+https://github.com/kurangdoa/indonesia_government_border_geohash.git
+
 ## **Description**
 Create geohash from government border to make the process of spatial join easier and faster. Initial work was done for Kelurahan level where it was broken down to geohash7. Geohash7 is used because the size will fit most of kelurahan. For more reference on geohash refer to this link https://www.movable-type.co.uk/scripts/geohash.html
 
