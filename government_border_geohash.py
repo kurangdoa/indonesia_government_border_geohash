@@ -52,9 +52,10 @@ import multiprocess as mp
 ### take the filelist ###
 
 path_base = os.getcwd()
+# path_base = 'D:/rhyando/work/project/tmp_government_border_geohash/'
 foldername = os.path.join(path_base, 'kmz')
 listfiles = [s for s in os.listdir(foldername) if s.endswith('.kmz')]
-listfiles = ['id_sulsel.kmz','id_bangkabelitung.kmz', 'id_banten.kmz', 'id_bengkulu.kmz', 'id_diy.kmz', 'id_gorontalo.kmz', 'id_jakarta.kmz', 'id_jambi.kmz', 'id_jawabarat.kmz', 'id_jawatengah.kmz', 'id_jawatimur.kmz', 'id_kalbar.kmz', 'id_kalsel.kmz', 'id_kalteng.kmz', 'id_kaltim.kmz', 'id_kalut.kmz', 'id_kepulauanriau.kmz', 'id_lampung.kmz', 'id_maluku.kmz', 'id_malukuutara.kmz', 'id_ntb.kmz', 'id_riau.kmz', 'id_sulbar.kmz', 'id_sulteng.kmz', 'id_sultenggara.kmz', 'id_sulut.kmz', 'id_sumbar.kmz', 'id_sumsel.kmz', 'id_sumut.kmz']
+# listfiles = ['id_sulsel.kmz','id_bangkabelitung.kmz', 'id_banten.kmz', 'id_bengkulu.kmz', 'id_diy.kmz', 'id_gorontalo.kmz', 'id_jakarta.kmz', 'id_jambi.kmz', 'id_jawabarat.kmz', 'id_jawatengah.kmz', 'id_jawatimur.kmz', 'id_kalbar.kmz', 'id_kalsel.kmz', 'id_kalteng.kmz', 'id_kaltim.kmz', 'id_kalut.kmz', 'id_kepulauanriau.kmz', 'id_lampung.kmz', 'id_maluku.kmz', 'id_malukuutara.kmz', 'id_ntb.kmz', 'id_riau.kmz', 'id_sulbar.kmz', 'id_sulteng.kmz', 'id_sultenggara.kmz', 'id_sulut.kmz', 'id_sumbar.kmz', 'id_sumsel.kmz', 'id_sumut.kmz']
 listfiles = [eachfile.split(sep = '.')[0] for eachfile in listfiles]
 print(listfiles)
 # listfiles = ['id_aceh']
@@ -153,8 +154,17 @@ for eachfile in listfiles:
         # break
 
     df = compol
+
+    path = os.path.join(path_base, 'shp', 'adm4_info.csv')
+    pol = pd.read_csv(path, index_col=False)
+    pol = pol.loc[:,["ADM4_PCODE","Shape_Area"]]
+    pol.columns = ["remark","poly_size"]
+    df = pd.merge(df,pol,on="remark")
+
+    # df = df.sort_values(by=['geohash','poly_size','area_size'], ascending=[True,True,False]).drop_duplicates('geohash', keep='first')
     df = df.sort_values(by=['geohash','area_size'], ascending=[True,False]).drop_duplicates('geohash', keep='first')
     df["remark"] = df.remark.apply(str)
+    df = df.loc[:,['geohash','remark','area_size']]
 
     fileresult = os.path.join(path_base, 'results',eachfile+ ".csv")
     df.to_csv(fileresult, index=False)
