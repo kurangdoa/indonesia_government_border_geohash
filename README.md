@@ -8,7 +8,7 @@ Create geohash from government border to make the process of spatial j
 For converting polygon to geohashit will rely heavily on **polygon-geohasher** package which could be seen in this link https://pypi.org/project/polygon-geohasher/. After the conversion, the duplication of geohashes that belong to two polygon will be removed by comparing its size from one another.
 
 ## **Code**
-The code is divided into two, **government_border_geohash.py** where the coverter from government border file to geohashes is conducted and **geohash_remove_duplicate.py** where the duplicate removal is conducted.
+The code is divided into two, **government_border_geohash.py** where the coverter from government border file to geohashes is conducted and **geohash_remove_duplicate.py** where the duplicate removal is conducted. If you have any dificulties in installing geopandas, consider following the step in this link https://stackoverflow.com/questions/54734667/error-installing-geopandas-a-gdal-api-version-must-be-specified-in-anaconda
 
 ## **How To**
 After downloading the data to the same folder as this readme.md simply run the code in your local computer. To download the data, follow this link https://drive.google.com/drive/folders/1kBfdHcif8sfdWz3NoHhQSaOw62LlOw7t?usp=sharing
